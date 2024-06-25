@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="freeMapper">
+	<resultMap type="free" id="freeResultSet">
+		<result column="fb_no" property="boardNo"></result>
+		<result column="fb_content" property="boardContent"></result>
+		<result column="fb_title" property="boardTitle"></result>
+		<result column="fb_indate" property="boardIndate"></result>
+		<result column="fb_views" property="boardViews"></result>
+		<result column="m_name" property="memberName"></result>
+		<result column="m_no" property="memberNo"></result>
+	</resultMap>
+
+
+
+	<select id="freeList" resultMap="freeResultSet">
+		SELECT fb_title, 
+		       fb_content, 
+		       fb_indate, 
+		       fb_views, 
+		       fb_no,
+		       m_name 
+		FROM free_board fb 
+		JOIN member m ON fb.m_no = m.m_no
+		<choose>
+			<when test="category.equals('fb_title')">
+				WHERE fb_title LIKE '%' || #{searchText} || '%' 
+			</when>
+			<when test="category.equals('fb_content')">
+				WHERE fb_content LIKE '%' || #{searchText} || '%'
+			</when>
+		</choose>
+		ORDER BY fb_indate DESC
+	</select>
+	
+	<!-- 
+		_int vs int
+		_int : 정수형 타입(기본형 변수 int)
+		
+		int : 객체(wrapper 클래스 :  Integer)
+	 -->
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM free_board
+		
+		<choose>
+			<when test="category.equals('fb_title')">
+				WHERE fb_title LIKE '%' || #{searchText} || '%' 
+			</when>
+			<when test="category.equals('fb_content')">
+				WHERE fb_content LIKE '%' || #{searchText} || '%'
+			</when>
+		</choose>
+	</select>
+	
+	<select id="getDetail" resultMap="freeResultSet">
+		SELECT fb_no,
+			   fb_title,
+			   m_name,
+			   fb_indate,
+			   fb_views,
+			   fb_content
+	    FROM free_board fb
+	    JOIN member m ON m.m_no = fb.m_no
+	    WHERE fb_no = #{boardNo}
+	</select>
+	
+	
+	
+</mapper>

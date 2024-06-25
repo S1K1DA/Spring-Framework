@@ -1,0 +1,197 @@
+    /* CSS 스타일링 */
+    body {
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+      }
+  
+      header {
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+      }
+  
+      nav {
+        background-color: #555;
+        color: #fff;
+        padding: 10px;
+      }
+  
+      nav ul {
+        margin: 0;
+        padding: 0;
+      }
+  
+      nav ul li {
+        display: inline-block;
+        margin-right: 10px;
+      }
+  
+      section {
+        padding: 20px;
+        height: 500px;
+      }
+  /* 메뉴 스타일링 */
+  .menu-item {
+    position: relative;
+  }
+
+  .menu-item:hover .submenu{
+    display:block;
+  }
+
+  .submenu {
+    display: none;
+    position:absolute;
+    width: 100px;
+    background-color: #555;
+  }
+
+      /* A 태그 스타일링 */
+      a {
+        color: #fff;
+        text-decoration: none;
+      }
+  
+      a:hover {
+        text-decoration: underline;
+      }
+  
+      footer {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+      }
+  
+      /* 로그인/회원가입 스타일링 */
+      .login-signup {
+        text-align: right;
+      }
+  
+      .login-signup a {
+        margin-left: 10px;
+      }
+
+      section {
+        padding: 20px;
+        margin: 20px;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 폼 스타일 */
+form {
+  margin-top: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+button {
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* 게시물 목록 테이블 스타일 */
+.table-container {
+  position: relative;
+}
+
+table {
+  width: 100%;
+  margin-top: 40px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #333;
+  color: white;
+}
+
+.add-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: -40px;
+  margin-right: 20px;
+}
+
+/* 로그인/회원가입 폼 스타일링 */
+.login-form,
+.signup-form {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 300px;
+}
+
+.login-form h2,
+.signup-form h2 {
+  text-align: center;
+}
+
+.input-container {
+  margin-bottom: 10px;
+}
+
+.input-container label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-container input[type="text"],
+.input-container input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.input-container button {
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  width: 100%;
+}
+
+
+/* 소개 이미지 */
+.my-image {
+  float: left;
+}
+
+.test-a {
+  margin-right: 30px;
+}
