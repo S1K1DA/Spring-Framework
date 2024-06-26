@@ -33,6 +33,10 @@ public class FreeDao {
 	public FreeDto getDetail(FreeDto free) {
 		return sqlSession.selectOne("freeMapper.getDetail", free);
 	}
+
+	public int addViews(FreeDto freeDto) {
+		return sqlSession.update("freeMapper.addViews", freeDto);
+	}
 	
 	
 }

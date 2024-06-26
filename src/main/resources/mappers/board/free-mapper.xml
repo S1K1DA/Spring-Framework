@@ -65,6 +65,12 @@
 	    WHERE fb_no = #{boardNo}
 	</select>
 	
+	<update id="addViews">
+		UPDATE free_board
+		SET fb_views = fb_views+1
+		WHERE fb_no = #{boardNo}
+	</update>
+	
 	
 	
 </mapper>

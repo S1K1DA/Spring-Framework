@@ -7,7 +7,7 @@
       <li><a href="portfolio.html">포트폴리오</a></li>
       <li class="menu-item"> <a href="#">게시판</a>
         <div class="submenu">
-          <a href="news.html">뉴스 게시판</a> 
+          <a href="/news/list.do">뉴스 게시판</a> 
           <a href="/free/list.do">자유 게시판</a>
         </div>
       </li>

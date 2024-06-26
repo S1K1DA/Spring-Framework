@@ -10,7 +10,7 @@ import kr.co.green.board.model.dto.FreeDto;
 import kr.co.green.common.pageing.PageInfo;
 
 @Service
-public class FreeServiceImpl implements BoardService {
+public class FreeServiceImpl implements FreeService {
 	
 	private final FreeDao freeDao;
 	private FreeDto freeDto;
@@ -35,12 +35,21 @@ public class FreeServiceImpl implements BoardService {
 	@Override
 	public FreeDto getDetail(FreeDto free) {
 		
-		freeDto = freeDao.getDetail(free);
-		System.out.println(freeDto.getBoardTitle());
-		
-		return null;
-		
-		
+		try {
+			// 조회수 증가
+			int result = freeDao.addViews(free);
+			
+			if(result == 1) {
+				// 게시글 정보 조회
+				freeDto = freeDao.getDetail(free);
+				return freeDto;
+			} else {
+				return null;
+			}
+			
+		} catch(Exception e) {
+			return null;
+		}
 		
 		
 	}

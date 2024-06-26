@@ -28,7 +28,7 @@
             </div>
             <hr> 
             <div style="margin-top:20px; margin-bottom: 20px;">
-               <img src=""
+               <img src="/resources/img/Logo.png"
                   width="300px" height="300px">
                 <p class="card-text">
                     ${result.boardContent}

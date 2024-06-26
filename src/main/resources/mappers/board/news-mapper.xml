@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="newsMapper">
+	<resultMap type="news" id="newsResultSet">
+		<result column="nb_no" property="boardNo"></result>
+		<result column="nb_content" property="boardContent"></result>
+		<result column="nb_title" property="boardTitle"></result>
+		<result column="nb_indate" property="boardIndate"></result>
+		<result column="nb_views" property="boardViews"></result>
+		<result column="m_name" property="memberName"></result>
+		<result column="m_no" property="memberNo"></result>
+	</resultMap>
+
+
+
+	<select id="newsList" resultMap="newsResultSet">
+		SELECT nb_title, 
+		       nb_content, 
+		       nb_indate, 
+		       nb_views, 
+		       nb_no,
+		       m_name 
+		FROM news_board nb 
+		JOIN member m ON nb.m_no = m.m_no
+		<choose>
+			<when test="category.equals('nb_title')">
+				WHERE nb_title LIKE '%' || #{searchText} || '%' 
+			</when>
+			<when test="category.equals('nb_content')">
+				WHERE nb_content LIKE '%' || #{searchText} || '%'
+			</when>
+		</choose>
+		ORDER BY nb_indate DESC
+	</select>
+	
+	<!-- 
+		_int vs int
+		_int : 정수형 타입(기본형 변수 int)
+		
+		int : 객체(wrapper 클래스 :  Integer)
+	 -->
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM news_board
+		
+		<choose>
+			<when test="category.equals('nb_title')">
+				WHERE nb_title LIKE '%' || #{searchText} || '%' 
+			</when>
+			<when test="category.equals('nb_content')">
+				WHERE nb_content LIKE '%' || #{searchText} || '%'
+			</when>
+		</choose>
+	</select>
+	
+	 <select id="getDetail" resultMap="newsResultSet">
+		SELECT nb_no,
+			   nb_title,
+			   m_name,
+			   nb_indate,
+			   nb_views,
+			   nb_content
+	    FROM news_board nb
+	    JOIN member m ON m.m_no = nb.m_no
+	    WHERE nb_no = #{boardNo}
+	</select>
+	
+	<update id="addViews">
+		UPDATE news_board
+		SET nb_views = nb_views+1
+		WHERE nb_no = #{boardNo}
+	</update> 
+	
+	
+	
+</mapper>
