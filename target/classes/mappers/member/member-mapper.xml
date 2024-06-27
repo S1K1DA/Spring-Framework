@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="memberMapper">
+	<select id="getCheckId" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE m_id = #{memberId}
+	</select>
+	
+	<insert id="setRegister">
+		INSERT INTO MEMBER
+		VALUES(member_seq.nextval, 
+			   #{memberName},
+			   #{memberId},
+			   #{memberPassword},
+			   DEFAULT,
+			   DEFAULT)
+	</insert>
+	
+	<resultMap type="member" id="memberResultSet">
+		<result column="M_NO" property="memberNo"></result>
+		<result column="M_NAME" property="memberName"></result>
+		<result column="M_ID" property="memberId"></result>
+		<result column="M_PWD" property="memberPassword"></result>
+		<result column="M_INDATE" property="memberIndate"></result>
+		<result column="M_TYPE" property="memberType"></result>
+	</resultMap>
+	
+	<select id="getInfo" resultMap="memberResultSet">
+		SELECT * FROM member 
+		WHERE m_Id = #{memberId} 
+	</select>
+</mapper>

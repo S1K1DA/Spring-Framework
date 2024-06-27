@@ -11,6 +11,7 @@ public class MemberDto {
 	private String memberName;
 	private String memberId;
 	private String memberPassword;
+	private String confirPassword;
 	private String memberIndate;
 	private String memberType;
 	

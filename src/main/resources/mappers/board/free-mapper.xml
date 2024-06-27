@@ -71,6 +71,18 @@
 		WHERE fb_no = #{boardNo}
 	</update>
 	
+	<insert id="setEnroll">
+        INSERT INTO free_board 
+        VALUES (free_board_seq.nextval,
+        		#{boardTitle}, 
+        		#{boardContent}, 
+        		DEFAULT, 
+        		DEFAULT, 
+        		NULL,
+        		NULL,
+        		#{memberNo})
+    </insert>
+	
 	
 	
 </mapper>

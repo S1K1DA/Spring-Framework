@@ -8,36 +8,17 @@
 	<%@ include file="../common/header.jsp" %>
 	<%@ include file="../common/nav.jsp" %>
 	
-	  <section>
-    <div class="signup-form">
-        <h2>회원가입</h2>
-        <form>
-          <div class="input-container">
-        </div>
-        <div class="input-container">
-          <label for="new-username">이름:</label>
-          <input type="text" id="new-username" name="new-username" onkeyup="checkName()" required>
-          <span id="msg-username"></span>
-        </div>
-
-        <div class="input-container">
-            <label for="new-userid">아이디:</label>
-            <input type="text" id="new-userid" name="new-userid" onkeyup="checkId()" required>
-            <span id="msg-userid"></span>
-          </div>
-          <div class="input-container">
-            <label for="new-password">비밀번호:</label>
-            <input type="password" id="new-password" name="new-password" onkeyup="checkPwd()" required>
-            <span id="msg-password"></span>
-          </div>
+	   <section>
+    <div class="login-form">
+        <h2>로그인</h2>
+        <form action="/member/login.do" method="POST">
+          <label for="username">아이디:</label>
+          <input type="text" id="username" name="memberId" required>
   
-          <div class="input-container">
-            <label for="confirm-password">비밀번호 확인:</label>
-            <input type="password" id="confirm-password" name="confirm-password" onkeyup="checkPwd()" required>
-            <span id="msg-password-check"></span>
-          </div>
+          <label for="password">비밀번호:</label>
+          <input type="password" id="password" name="memberPassword" required>
   
-          <button type="submit">회원가입</button>
+          <button type="submit">로그인</button>
         </form>
       </div>
   </section>

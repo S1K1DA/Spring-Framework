@@ -27,6 +27,19 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<beans:bean id="loginCheckInterceptor" 
+				class="kr.co.green.common.interceptor.LoginCheckInterceptor">
+	</beans:bean>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/**/enrollForm.do"></mapping>
+			<exclude-mapping path="/**/*.css"></exclude-mapping>
+			<exclude-mapping path="/**/*.js"></exclude-mapping>
+			<beans:ref bean="loginCheckInterceptor"></beans:ref>
+		</interceptor>
+	</interceptors>
+	
 	<context:component-scan base-package="kr.co.green" />
 	
 	

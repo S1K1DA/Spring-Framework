@@ -26,9 +26,11 @@
             <button class="btn btn-outline-secondary" type="submit"
                id="button-addon2" style="height: 46px;">검색</button>
          </form>
-
-         <button onclick="window.location.href = '/form/enrollForm.do'"
+			
+		 <c:if test="${sessionScope.memberNo > 0}">
+         <button onclick="window.location.href = '/free/enrollForm.do'"
             style="position: absolute; right: 4%;">등록</button>
+		 </c:if>
 
       </div>
       <div class="table-container">

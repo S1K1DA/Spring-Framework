@@ -16,5 +16,8 @@ public interface FreeService {
 	
 	// freeList 게시글 상세 보기
 	FreeDto getDetail(FreeDto free);
+	
+	// freeList 게시글 등록
+	int setEnroll(FreeDto free);
 
 }

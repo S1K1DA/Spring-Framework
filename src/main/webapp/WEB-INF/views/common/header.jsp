@@ -3,6 +3,7 @@
 <header>
     <h1>나의 홈페이지</h1>
     <div class="login-signup">
-      <a href="login.html">로그인</a> <a href="/member/registerForm.do">회원가입</a>
+      <a href="/member/loginForm.do">로그인</a> <a href="/member/registerForm.do">회원가입</a>
     </div>
+    
 </header>

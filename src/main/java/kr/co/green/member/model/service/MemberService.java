@@ -1,10 +1,15 @@
 package kr.co.green.member.model.service;
 
+import kr.co.green.member.model.dto.MemberDto;
+
 public interface MemberService {
 	
-	public String getCheckId(String id);
 	
+	int getCheckId(String memberId);
 	
+	int setRegister(MemberDto member);
+	
+	MemberDto login(MemberDto member);
 
 
 }
