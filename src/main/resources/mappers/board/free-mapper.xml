@@ -10,6 +10,10 @@
 		<result column="fb_views" property="boardViews"></result>
 		<result column="m_name" property="memberName"></result>
 		<result column="m_no" property="memberNo"></result>
+
+		<result column="upload_path" property="uploadPath"></result>
+		<result column="upload_name" property="uploadName"></result>
+		<result column="upload_origin_name" property="uploadOriginName"></result>
 	</resultMap>
 
 
@@ -54,15 +58,19 @@
 	</select>
 	
 	<select id="getDetail" resultMap="freeResultSet">
-		SELECT fb_no,
+		SELECT fb.fb_no,
 			   fb_title,
 			   m_name,
 			   fb_indate,
 			   fb_views,
-			   fb_content
+			   fb_content,
+			   m.m_no,
+			   upload_path,
+			   upload_name
 	    FROM free_board fb
 	    JOIN member m ON m.m_no = fb.m_no
-	    WHERE fb_no = #{boardNo}
+		LEFT JOIN free_upload fu ON fb.fb_no = fu.fb_no
+	    WHERE fb.fb_no = #{boardNo}
 	</select>
 	
 	<update id="addViews">
@@ -72,8 +80,16 @@
 	</update>
 	
 	<insert id="setEnroll">
+		<!-- 
+			1. 시퀀스의 현재 value : 22
+			2. selectKey 안에 있는 SELECT가 실행 되면서 시퀀스의 value가 1 증가(23)
+			3. 실행한 결과 값(23) -> 전달받았던 FreeDto의 BoardNo 변수에 저장
+		 -->
+		<selectKey keyProperty="boardNo" resultType="_int" order="BEFORE">
+			SELECT free_board_seq.nextval FROM dual
+		</selectKey>
         INSERT INTO free_board 
-        VALUES (free_board_seq.nextval,
+        VALUES (#{boardNo},
         		#{boardTitle}, 
         		#{boardContent}, 
         		DEFAULT, 
@@ -81,6 +97,15 @@
         		NULL,
         		NULL,
         		#{memberNo})
+    </insert>
+    
+    <insert id="setUpload">
+    	INSERT INTO free_upload
+    	VALUES (free_upload_seq.nextval,
+    			#{uploadPath},
+    			#{uploadName},
+    			#{uploadOriginName},
+    			#{boardNo})
     </insert>
 	
 	

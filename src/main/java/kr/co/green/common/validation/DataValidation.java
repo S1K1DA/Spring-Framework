@@ -1,5 +1,8 @@
 package kr.co.green.common.validation;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class DataValidation {
 	
 	public boolean lengthCheck(String data, int dataLength) {

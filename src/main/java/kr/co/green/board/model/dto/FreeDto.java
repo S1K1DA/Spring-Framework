@@ -22,4 +22,8 @@ public class FreeDto {
 	
 	private String category = "";
 	private String searchText = "";
+	
+	private String uploadPath;
+	private String uploadName;
+	private String uploadOriginName;
 }

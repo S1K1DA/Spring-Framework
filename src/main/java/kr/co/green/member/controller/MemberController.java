@@ -2,6 +2,7 @@ package kr.co.green.member.controller;
 
 import java.util.Objects;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +82,17 @@ public class MemberController {
 		} else {
 			return "common/error";
 		}
+	}
+	
+	@GetMapping("/logout.do")
+	public String logout(HttpServletRequest request) {
+		// 현재 세션이 있으면 세션 가져오기
+		// 현재 세션이 없으면 null 반환
+		HttpSession session = request.getSession(false);
+		if(session != null) {
+			session.invalidate();
+		}
+		return "home";
 	}
 
 	

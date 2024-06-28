@@ -10,7 +10,7 @@
 	
 	   <section id="post-form">
     <h2>새 글 작성</h2>
-    <form action="/free/enroll.do" method="POST">
+    <form action="/free/enroll.do" method="POST" enctype="multipart/form-data">
         <label for="title">제목:</label>
         <input type="text" id="title" name="boardTitle" required>
         
@@ -19,6 +19,8 @@
         
         <label for="content">내용:</label>
         <textarea id="content" name="boardContent" rows="4" required></textarea>
+        
+        <input type="file" name="upload">
         
         <button type="submit" onclick="save()">작성</button>
     </form>

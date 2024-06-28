@@ -41,6 +41,10 @@ public class FreeDao {
 	public int setEnroll(FreeDto free) {
 		return sqlSession.insert("freeMapper.setEnroll", free);
 	}
+
+	public int setUpload(FreeDto free) {
+		return sqlSession.insert("freeMapper.setUpload", free);
+	}
 	
 	
 }

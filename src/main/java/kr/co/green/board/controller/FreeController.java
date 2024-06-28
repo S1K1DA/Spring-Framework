@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.green.board.model.dto.FreeDto;
 import kr.co.green.board.model.service.FreeServiceImpl;
@@ -57,10 +58,20 @@ public class FreeController {
 	}
 	
 	@GetMapping("/detail.do")
-	public String freeDetail(FreeDto free, Model model) {
+	public String freeDetail(FreeDto free, Model model, HttpSession session) {
 		FreeDto result = freeService.getDetail(free);
 		
+		// 1. resources 이후의 문자열 가져오기
+		
+		
+		
 		if(!Objects.isNull(result)) {  // result가 NULL이 아닐 때
+			if(result.getUploadPath() != null && result.getUploadName() != null ) {
+				int pathIndex = result.getUploadPath().lastIndexOf("resources");
+				String path = "/" + result.getUploadPath().substring(pathIndex).replace("\\", "/");
+				result.setUploadPath(path);
+			} 
+			model.addAttribute("loginMemberNo", session.getAttribute("memberNo"));
 			model.addAttribute("result", result); // 데이터 바인딩
 			return "board/free/freeDetail";
 		} else { // NULL일 때 에러 페이지로 이동
@@ -75,14 +86,17 @@ public class FreeController {
 	}
 	
 	@PostMapping("/enroll.do")
-	public String setEnroll(FreeDto free, HttpSession session) {
+	public String setEnroll(FreeDto free, 
+							MultipartFile upload, 
+							HttpSession session) {
 		free.setMemberNo((int)session.getAttribute("memberNo"));
-		int result = freeService.setEnroll(free);
-		
+		int result = freeService.setEnroll(free, upload, session);
+		System.out.println(result);
 		if(result == 1) {
 			return "redirect:/free/list.do";
 		} else {
 			return "common/error";
+			
 		}
 		
 	}

@@ -28,8 +28,10 @@
             </div>
             <hr> 
             <div style="margin-top:20px; margin-bottom: 20px;">
-               <img src=""
+            <c:if test="${result.uploadPath != null}">
+               <img src="${result.uploadPath}${result.uploadName} "
                   width="300px" height="300px">
+            </c:if>
                 <p class="card-text">
                     ${result.boardContent}
                 </p>
@@ -37,8 +39,11 @@
         </div>
         <div class="card-footer d-flex justify-content-center">
             <button type="button" class="btn btn-secondary mx-2" onclick="window.history.back()">뒤로가기</button>                  
+               
+               <c:if test="${loginMemberNo == result.memberNo}">
                <button type="button" class="btn btn-primary mx-2" onclick="location.href=''">수정</button>
                <button type="submit" class="btn btn-danger mx-2">삭제</button>
+               </c:if>
         </div>
         
         </form>
