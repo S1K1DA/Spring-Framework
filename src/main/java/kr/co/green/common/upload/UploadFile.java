@@ -1,5 +1,6 @@
 package kr.co.green.common.upload;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,6 +19,13 @@ import kr.co.green.board.model.dto.FreeDto;
 @Component
 public class UploadFile {
 	public static final String UPLOAD_PATH = "C:\\dev\\work-space\\Spring\\Project\\src\\main\\webapp\\resources\\uploads\\";
+	
+	public boolean delete(FreeDto free) {
+		File file = new File(free.getUploadPath()+free.getUploadName());
+		return file.delete();
+	}
+	
+	
 	
 	public void upload(FreeDto free, 
 					   MultipartFile upload, 

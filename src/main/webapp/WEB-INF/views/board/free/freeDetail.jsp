@@ -15,7 +15,8 @@
 	
 <section class="container mt-4" style="height: 70vh">
     <div class="card text-center" style="height: 100%">
-       <form>
+       <form action="/free/editForm.do" method="post">
+       <input type="hidden" name="boardNo" value="${result.boardNo}">
        
         <div class="card-header">
             <h2 id="fb-title">${result.boardTitle}</h2>
@@ -41,11 +42,10 @@
             <button type="button" class="btn btn-secondary mx-2" onclick="window.history.back()">뒤로가기</button>                  
                
                <c:if test="${loginMemberNo == result.memberNo}">
-               <button type="button" class="btn btn-primary mx-2" onclick="location.href=''">수정</button>
-               <button type="submit" class="btn btn-danger mx-2">삭제</button>
+               <button type="submit" class="btn btn-primary mx-2">수정</button>
+               <button type="button" class="btn btn-danger mx-2" onclick="location.href='/free/delete.do?boardNo=${result.boardNo}&memberNo=${result.memberNo}'">삭제</button>
                </c:if>
         </div>
-        
         </form>
     </div>
 </section>

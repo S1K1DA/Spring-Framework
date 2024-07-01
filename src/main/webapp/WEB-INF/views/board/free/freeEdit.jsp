@@ -8,74 +8,48 @@
 	<%@ include file="../../common/header.jsp" %>
 	<%@ include file="../../common/nav.jsp" %>
 	
-	   <section style="height: 70vh">
-      <h1>자유 게시판</h1>
-      <hr>
-      <div class="input-group mb-3" style="width: 100%; margin-top: 40px">
-
-         <form action="/freeBoard/list.do" method="GET">
-            <input type="hidden" name="cpage" value="1"> <select
-               class="form-select" id="inputGroupSelect02" name="category"
-               style="width: 100px; height: 46px; flex: 0 0 auto;">
-               <option value="fb_title" selected>제목</option>
-               <option value="fb_content">내용</option>
-               <option value="fb_name">작성자</option>
-
-            </select> <input type="text" style="width: 500px; flex: 0 0 auto;"
-               class="form-control" name="search-text" placeholder="검색어를 입력해주세요."
-               aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary" type="submit"
-               id="button-addon2" style="height: 46px;">검색</button>
-         </form>
-
-         <button onclick="window.location.href = '/form/enrollForm.do'"
-            style="position: absolute; right: 4%;">등록</button>
-
-      </div>
-      <div class="table-container">
-         <table class="table table-hover" style="margin-top: 10px;">
-            <thead>
-               <tr>
-                  <th scope="col">번호</th>
-                  <th scope="col">제목</th>
-                  <th scope="col">작성자</th>
-                  <th scope="col">작성일</th>
-                  <th scope="col">조회수</th>
-               </tr>
-            </thead>
-            <tbody>
-
-               <tr onclick="location.href=''">
-                  <td scope="row">0</td>
-                  <td>안녕하세요</td>
-                  <td>홍길동</td>
-                  <td>2024-06-24</td>
-                  <td>1</td>
-               </tr>
-            </tbody>
-         </table>
-      </div>
-
-      <nav aria-label="Page navigation example"
-         style="background-color: white;">
-
-         <ul class="pagination" style="justify-content: center;">
-            <li class="page-item" style="margin-right: 0px"><a
-               class="page-link" href="#" aria-label="Previous"> <span
-                  aria-hidden="true">&laquo;</span>
-            </a></li>
-
-            <li class="page-item" style="margin-right: 0px"><a
-               class="page-link" href="/freeBoard/list.do?cpage=1">1</a></li>
-
-            <li class="page-item" style="margin-right: 0px"><a
-               class="page-link" href="#" aria-label="Next"> <span
-                  aria-hidden="true">&raquo;</span>
-            </a></li>
-
-         </ul>
-      </nav>
-   </section>
+	   <section class="container mt-4" style="height: 70vh">
+    <div class="card text-center" style="height: 100%">
+       <form action="/free/edit.do" method="post" enctype="multipart/form-data">
+       <input type="hidden" name="boardNo" value="${result.boardNo}">
+       <input type="hidden" name="memberNo" value="${result.memberNo}">
+       
+        <div class="card-header">
+        	<input type="text" name="boardTitle" value="${result.boardTitle}">
+            <%-- <h2 id="fb-title">${result.boardTitle}</h2> --%>
+        </div>
+        <div class="card-body">
+            <div class="d-flex justify-content-center mb-3">
+                <div class="mx-3">작성자: <span id="fb-writer">${result.memberName}</span></div>                  
+                <div class="mx-3">작성일: <span id="fb-date">${result.boardIndate}</span></div>
+                <div class="mx-3">조회수: <span id="fb-views">${result.boardViews}</span></div>
+            </div>
+            <hr> 
+            <div style="margin-top:20px; margin-bottom: 20px;">
+            <c:if test="${result.uploadPath != null}">
+               <img src="${result.uploadPath}${result.uploadName} "
+                  width="300px" height="300px">
+            </c:if>
+            
+            <textarea name="boardContent">${result.boardContent}</textarea>
+                <%-- <p class="card-text">
+                    ${result.boardContent}
+                </p> --%>
+            </div>
+            
+            
+            <input type="file" name="upload">
+        </div>
+        <div class="card-footer d-flex justify-content-center">
+            <button type="button" class="btn btn-secondary mx-2" onclick="window.history.back()">뒤로가기</button>                  
+               
+               <c:if test="${loginMemberNo == result.memberNo}">
+               <button type="submit" class="btn btn-primary mx-2">수정하기</button>
+               </c:if>
+        </div>
+        </form>
+    </div>
+</section>
    
 	<%@ include file="../../common/footer.jsp" %>
 </body>

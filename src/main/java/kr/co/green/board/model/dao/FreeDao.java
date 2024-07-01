@@ -45,6 +45,22 @@ public class FreeDao {
 	public int setUpload(FreeDto free) {
 		return sqlSession.insert("freeMapper.setUpload", free);
 	}
+
+	public int delete(int boardNo) {
+		return sqlSession.update("freeMapper.delete", boardNo);
+	}
+
+	public FreeDto getFileName(int boardNo) {
+		return sqlSession.selectOne("freeMapper.getFileName", boardNo);
+	}
+	
+	public int edit(FreeDto free) {
+		return sqlSession.update("freeMapper.edit", free);
+	}
+	
+	public int setUploadUpdate(FreeDto free) {
+		return sqlSession.update("freeMapper.setUploadUpdate", free);
+	}
 	
 	
 }

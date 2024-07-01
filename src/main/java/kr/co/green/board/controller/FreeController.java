@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.green.board.model.dto.FreeDto;
@@ -59,7 +60,7 @@ public class FreeController {
 	
 	@GetMapping("/detail.do")
 	public String freeDetail(FreeDto free, Model model, HttpSession session) {
-		FreeDto result = freeService.getDetail(free);
+		FreeDto result = freeService.getDetail(free, "detail");
 		
 		// 1. resources 이후의 문자열 가져오기
 		
@@ -98,10 +99,55 @@ public class FreeController {
 			return "common/error";
 			
 		}
+	}
+	
+	@GetMapping("/delete.do")
+//	public String delete(int boardNo, int memberNo, HttpSession session) {
+		public String delete(int boardNo, 
+							 int memberNo, 
+							 @SessionAttribute("memberNo") int loginMemberNo) {
+		// UPDATE
+		System.out.println(boardNo);
+		int result = freeService.delete(boardNo, memberNo, loginMemberNo);
+		
+		// 파일 삭제
+		return result == 1 ? "redirect:/free/list.do" : "/common/error";
 		
 	}
 	
+	@PostMapping("/editForm.do")
+	public String editForm(FreeDto free,
+						   Model model,
+						   HttpSession session) {
+		FreeDto result = freeService.getDetail(free, "edit");
+		
+		
+		if(!Objects.isNull(result)) {  // result가 NULL이 아닐 때
+			if(result.getUploadPath() != null && result.getUploadName() != null ) {
+				int pathIndex = result.getUploadPath().lastIndexOf("resources");
+				String path = "/" + result.getUploadPath().substring(pathIndex).replace("\\", "/");
+				result.setUploadPath(path);
+			} 
+			model.addAttribute("loginMemberNo", session.getAttribute("memberNo"));
+			model.addAttribute("result", result); // 데이터 바인딩
+			return "board/free/freeEdit";
+		} else { // NULL일 때 에러 페이지로 이동
+			return "common/error";
+		}
+	}
+	
+	@PostMapping("/edit.do")
+	public String edit(FreeDto free,
+					   MultipartFile upload,
+					   @SessionAttribute("memberNo") int loginMemberNo) {
+		int result = freeService.edit(free, upload, loginMemberNo);
+		if(result == 1) {
+			return "redirect:/free/detail.do?boardNo="+free.getBoardNo();
+		}
+		return "/common/error";
+	}
+}
 	
 	
 
-}
+

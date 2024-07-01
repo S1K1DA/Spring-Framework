@@ -27,12 +27,14 @@
 		       m_name 
 		FROM free_board fb 
 		JOIN member m ON fb.m_no = m.m_no
+		
+		WHERE fb_delete IS NULL
 		<choose>
 			<when test="category.equals('fb_title')">
-				WHERE fb_title LIKE '%' || #{searchText} || '%' 
+				AND fb_title LIKE '%' || #{searchText} || '%' 
 			</when>
 			<when test="category.equals('fb_content')">
-				WHERE fb_content LIKE '%' || #{searchText} || '%'
+				AND fb_content LIKE '%' || #{searchText} || '%'
 			</when>
 		</choose>
 		ORDER BY fb_indate DESC
@@ -46,13 +48,14 @@
 	 -->
 	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*) FROM free_board
+		WHERE fb_delete IS NULL
 		
 		<choose>
 			<when test="category.equals('fb_title')">
-				WHERE fb_title LIKE '%' || #{searchText} || '%' 
+				AND fb_title LIKE '%' || #{searchText} || '%' 
 			</when>
 			<when test="category.equals('fb_content')">
-				WHERE fb_content LIKE '%' || #{searchText} || '%'
+				AND fb_content LIKE '%' || #{searchText} || '%'
 			</when>
 		</choose>
 	</select>
@@ -107,6 +110,34 @@
     			#{uploadOriginName},
     			#{boardNo})
     </insert>
+    
+    <update id="delete">
+    	UPDATE free_board 
+    	SET fb_delete = sysdate 
+    	WHERE fb_no = #{boardNo}
+    </update>
+    
+    <select id="getFileName" resultMap="freeResultSet">
+    	SELECT upload_path, upload_name
+    	FROM free_upload
+    	WHERE fb_no = #{boardNo}
+    </select>
+    
+    <update id="edit">
+    	UPDATE free_board
+    	SET fb_title = #{boardTitle},
+    	    fb_content = #{boardContent},
+    	    fb_update = default
+    	WHERE fb_no = #{boardNo}
+    </update>
+    
+    <update id="setUploadUpdate">
+    	UPDATE free_upload
+    	SET upload_path = #{uploadPath},
+    		upload_name = #{uploadName},
+    		upload_origin_name = #{uploadOriginName}
+    	WHERE fb_no = #{boardNo}
+    </update>
 	
 	
 	
