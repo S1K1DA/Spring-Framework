@@ -3,6 +3,7 @@ package kr.co.green.board.controller;
 import java.util.List;
 import java.util.Objects;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,9 +58,18 @@ public class FreeController {
 		return "board/free/freeList";
 		
 	}
-	
 	@GetMapping("/detail.do")
 	public String freeDetail(FreeDto free, Model model, HttpSession session) {
+		
+	//   HttpServletRequest request
+		// 컨트롤러를 이용한 referer 처리
+//		String referer = request.getHeader("referer");
+//		System.out.println("referer : " + referer);
+//		if(referer == null || !referer.endsWith("/list.do")) {
+//			return "common/error";
+//		}
+		
+		
 		FreeDto result = freeService.getDetail(free, "detail");
 		
 		// 1. resources 이후의 문자열 가져오기

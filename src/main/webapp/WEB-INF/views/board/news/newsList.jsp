@@ -28,15 +28,19 @@
                   <button class="btn btn-outline-secondary" type="submit"
                      id="button-addon2" style="height: 46px;">검색</button>
                </form>
-               <button onclick="window.location.href = '/form/enrollForm.do'"
+               <c:if test="${sessionScope.memberNo > 0}">
+               <button onclick="window.location.href = '/news/enrollForm.do'"
                   style="position: absolute; right: 4%;">등록</button>
+               </c:if>
             </div>
          </div>
          <div class="row">
          <c:forEach var="news" items="${list}">
             <div class="col-12 col-md-6 col-lg-2 mb-4">
                <div class="card" >
-                  <img src="/resources/img/Logo.png" class="card-img-top" alt="뉴스 이미지" />
+               	  <c:if test="${news.uploadPath != null}">
+                  <img src="${news.uploadPath}${news.uploadName}" class="card-img-top" alt="뉴스 이미지" />
+               	  </c:if>
                   <div class="card-body">
                      <h5 class="card-title">${news.boardTitle}</h5>
                      <p class="card-text">${news.boardContent}</p>

@@ -10,6 +10,10 @@
 		<result column="nb_views" property="boardViews"></result>
 		<result column="m_name" property="memberName"></result>
 		<result column="m_no" property="memberNo"></result>
+		
+		<result column="upload_path" property="uploadPath"></result>
+		<result column="upload_name" property="uploadName"></result>
+		<result column="upload_origin_name" property="uploadOriginName"></result>
 	</resultMap>
 
 
@@ -19,16 +23,23 @@
 		       nb_content, 
 		       nb_indate, 
 		       nb_views, 
-		       nb_no,
-		       m_name 
+		       nb.nb_no,
+		       m_name,
+		       m.m_no,
+			   upload_path,
+			   upload_name 
 		FROM news_board nb 
 		JOIN member m ON nb.m_no = m.m_no
+		FULL JOIN news_upload nu ON nb.nb_no = nu.nb_no
+		
+		
+		WHERE nb_delete IS NULL
 		<choose>
 			<when test="category.equals('nb_title')">
-				WHERE nb_title LIKE '%' || #{searchText} || '%' 
+				AND nb_title LIKE '%' || #{searchText} || '%' 
 			</when>
 			<when test="category.equals('nb_content')">
-				WHERE nb_content LIKE '%' || #{searchText} || '%'
+				AND nb_content LIKE '%' || #{searchText} || '%'
 			</when>
 		</choose>
 		ORDER BY nb_indate DESC
@@ -42,27 +53,32 @@
 	 -->
 	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*) FROM news_board
+		WHERE nb_delete IS NULL
 		
 		<choose>
 			<when test="category.equals('nb_title')">
-				WHERE nb_title LIKE '%' || #{searchText} || '%' 
+				AND nb_title LIKE '%' || #{searchText} || '%' 
 			</when>
 			<when test="category.equals('nb_content')">
-				WHERE nb_content LIKE '%' || #{searchText} || '%'
+				AND nb_content LIKE '%' || #{searchText} || '%'
 			</when>
 		</choose>
 	</select>
 	
 	 <select id="getDetail" resultMap="newsResultSet">
-		SELECT nb_no,
+		SELECT nb.nb_no,
 			   nb_title,
 			   m_name,
 			   nb_indate,
 			   nb_views,
-			   nb_content
+			   nb_content,
+			   m.m_no,
+			   upload_path,
+			   upload_name
 	    FROM news_board nb
 	    JOIN member m ON m.m_no = nb.m_no
-	    WHERE nb_no = #{boardNo}
+	    LEFT JOIN news_upload fu ON nb.nb_no = fu.nb_no
+	    WHERE nb.nb_no = #{boardNo}
 	</select>
 	
 	<update id="addViews">
@@ -70,6 +86,63 @@
 		SET nb_views = nb_views+1
 		WHERE nb_no = #{boardNo}
 	</update> 
+	
+	<insert id="setEnroll">
+		<!-- 
+			1. 시퀀스의 현재 value : 22
+			2. selectKey 안에 있는 SELECT가 실행 되면서 시퀀스의 value가 1 증가(23)
+			3. 실행한 결과 값(23) -> 전달받았던 FreeDto의 BoardNo 변수에 저장
+		 -->
+		<selectKey keyProperty="boardNo" resultType="_int" order="BEFORE">
+			SELECT news_board_seq.nextval FROM dual
+		</selectKey>
+        INSERT INTO news_board 
+        VALUES (#{boardNo},
+        		#{boardTitle}, 
+        		#{boardContent}, 
+        		DEFAULT, 
+        		DEFAULT, 
+        		NULL,
+        		NULL,
+        		#{memberNo})
+    </insert>
+    
+    <insert id="setUpload">
+    	INSERT INTO news_upload
+    	VALUES (news_upload_seq.nextval,
+    			#{uploadPath},
+    			#{uploadName},
+    			#{uploadOriginName},
+    			#{boardNo})
+    </insert>
+    
+    <update id="newsDelete">
+    	UPDATE news_board
+    	SET nb_delete = sysdate
+    	WHERE nb_no = #{boardNo}
+    </update>
+    
+    <select id="getFileName" resultMap="newsResultSet">
+    	SELECT upload_path, upload_name
+    	FROM news_upload
+    	WHERE nb_no = #{boardNo}
+    </select>
+    
+    <update id="setUploadUpdate">
+    	UPDATE news_upload
+    	SET upload_path = #{uploadPath},
+    		upload_name = #{uploadName},
+    		upload_origin_name = #{uploadOriginName}
+    	WHERE nb_no = #{boardNo}
+    </update>
+    
+    <update id="edit">
+    	UPDATE news_board
+    	SET nb_title = #{boardTitle},
+    	    nb_content = #{boardContent},
+    	    nb_update = default
+    	WHERE nb_no = #{boardNo}
+    </update>
 	
 	
 	

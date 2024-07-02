@@ -31,7 +31,19 @@
 				class="kr.co.green.common.interceptor.LoginCheckInterceptor">
 	</beans:bean>
 	
+	<beans:bean id="accessIntercepter" class="kr.co.green.common.interceptor.AccessInterceptor"/>
+	
+	
 	<interceptors>
+		<interceptor>
+			<mapping path="/free/detail.do"></mapping>
+			<mapping path="/news/detail.do"></mapping>
+			<exclude-mapping path="/**/*.css"></exclude-mapping>
+			<exclude-mapping path="/**/*.js"></exclude-mapping>
+			<beans:ref bean="accessIntercepter"></beans:ref>
+		</interceptor>
+	
+	
 		<interceptor>
 			<mapping path="/**/enrollForm.do"></mapping>
 			<exclude-mapping path="/**/*.css"></exclude-mapping>
