@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.green.member.model.dto.MemberDto;
 import kr.co.green.member.model.service.MemberServiceImpl;
@@ -70,7 +71,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("/login.do")
-	public String login(MemberDto member, HttpSession session) {
+	public String login(MemberDto member, HttpSession session, RedirectAttributes redirectAttributes) {
 		
 		MemberDto loginUser = memberService.login(member);
 		
@@ -78,21 +79,37 @@ public class MemberController {
 			session.setAttribute("memberNo", loginUser.getMemberNo());
 			session.setAttribute("memberType", loginUser.getMemberType());
 			session.setAttribute("memberName", loginUser.getMemberName());
-			return "home";
+//			session.setAttribute("msg", "로그인되었습니다.");
+			
+//		    addAttribute  vs  addFlashAttribute
+//			1. addAttribute : int, String 넘길 때 사용
+//			                  -> 쿼리 파라미터로 전달
+//			2. addFlashAttribute : 객체를 넘기고 싶거나, 일회성 변수를 사용하고 싶을 때
+//			   					  -> 한번 사용 후 사라짐 (휘발성 데이터)
+			redirectAttributes.addFlashAttribute("icon", "success");
+			redirectAttributes.addFlashAttribute("title", "로그인 성공");
+			redirectAttributes.addFlashAttribute("text", "로그인에 성공했습니다.");
+			return "redirect:/";
 		} else {
-			return "common/error";
+			redirectAttributes.addFlashAttribute("icon", "error");
+			redirectAttributes.addFlashAttribute("title", "로그인 실패");
+			redirectAttributes.addFlashAttribute("text", "아이디 또는 비밀번호를 확인해주세요.");
+			return "redirect:/member/loginForm.do";
 		}
 	}
 	
 	@GetMapping("/logout.do")
-	public String logout(HttpServletRequest request) {
+	public String logout(HttpServletRequest request, RedirectAttributes redirectAttributes) {
 		// 현재 세션이 있으면 세션 가져오기
 		// 현재 세션이 없으면 null 반환
 		HttpSession session = request.getSession(false);
 		if(session != null) {
+			redirectAttributes.addFlashAttribute("icon", "success");
+			redirectAttributes.addFlashAttribute("title", "로그아웃");
+			redirectAttributes.addFlashAttribute("text", "로그아웃 되었습니다.");
 			session.invalidate();
 		}
-		return "home";
+		return "redirect:/";
 	}
 
 	

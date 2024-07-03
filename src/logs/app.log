@@ -1,0 +1,4 @@
+2024-07-03 16:43:36 INFO  FreeController:47 - /free/List 호출 완료 : cpage=1, memberNo=null
+2024-07-03 16:43:37 DEBUG FreeController:63 - 호출된 게시글 : list size=5
+2024-07-03 16:43:58 INFO  FreeController:47 - /free/List 호출 완료 : cpage=1, memberNo=10
+2024-07-03 16:43:58 DEBUG FreeController:63 - 호출된 게시글 : list size=5

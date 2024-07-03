@@ -3,9 +3,10 @@ package kr.co.green.board.controller;
 import java.util.List;
 import java.util.Objects;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +27,7 @@ import kr.co.green.common.pageing.Pagination;
 public class FreeController {
 	
 //	@Autowired private FreeDto fd;
-	 
+	private static final Logger logger = LogManager.getLogger(FreeController.class);
 	
 	private final FreeServiceImpl freeService;
 	
@@ -38,9 +39,12 @@ public class FreeController {
 	@GetMapping("/list.do")  //  '/list.do'로 오는 요청을 받겠다. GET
 	public String freeList(Model model,
 							@RequestParam(value="cpage", defaultValue="1") int cpage,
-							FreeDto free) {
+							FreeDto free,
+							HttpSession session) {
 		// RequestParam 어노테이션 : 쿼리스트링을 받을 때 사용
 		// value : 쿼리스트링 키
+		
+		logger.info("/free/List 호출 완료 : cpage={}, memberNo={}", cpage, session.getAttribute("memberNo"));
 		
 		// 1. 전체 게시글 수 구하기(페이징 처리)
 		int listCount = freeService.getListCount(free);
@@ -55,6 +59,8 @@ public class FreeController {
 		model.addAttribute("row", row);
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);  // 객체 바인딩
+		
+		logger.debug("호출된 게시글 : list size={}", list.size());
 		return "board/free/freeList";
 		
 	}
