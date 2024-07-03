@@ -23,9 +23,16 @@ public class AccessInterceptor implements HandlerInterceptor{
 			System.out.println("serverAddress: " + serverAddress);
 			System.out.println("localServerAddress : " + localServerAddress);
 			
+			// 1. 요청받은 URL이 /free/detail.do일때 (상세보기를 요청했을 때)
+			// 2. 주소창에 직접 URL을 입력해서 요청했을 때
+			// 3. 사용자가 있던 URL이 http://localhost/free/list.do가 아닐때
+			//    (다른 페이지에서 상세보기를 요청했을 때)
 			if(requestURI.equals("/free/detail.do") &&
 				(referer == null || !referer.startsWith(localServerAddress + "/free/list.do"))) {
-				response.sendRedirect("/WEB-INF/views/board/common/error.jsp");
+				
+				// 에러페이지를 이동
+//				response.sendRedirect("/WEB-INF/views/board/common/error.jsp");
+				response.sendRedirect("/error/accessDenied?referer=" + referer);
 				return false;
 			}
 
