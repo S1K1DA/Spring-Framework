@@ -36,8 +36,9 @@
 	
 	<interceptors>
 		<interceptor>
-			<mapping path="/free/detail.do"></mapping>
-			<mapping path="/news/detail.do"></mapping>
+			<mapping path="/free/**"></mapping>
+			<mapping path="/news/**"></mapping>
+			<mapping path="/member/**"></mapping>
 			<exclude-mapping path="/**/*.css"></exclude-mapping>
 			<exclude-mapping path="/**/*.js"></exclude-mapping>
 			<beans:ref bean="accessIntercepter"></beans:ref>

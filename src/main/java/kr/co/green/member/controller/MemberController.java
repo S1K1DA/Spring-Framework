@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,10 +57,14 @@ public class MemberController {
 	}
 	
 	@PostMapping("/register.do")
-	public String setRegister(MemberDto member) {
+	@RequestMapping("/register.do")
+	public String setRegister(MemberDto member, Model model, RedirectAttributes redirectAttributes) {
 		int result = memberService.setRegister(member);
 		
-		return intReturn(result, "member/login", "common/error");
+		redirectAttributes.addFlashAttribute("icon", "success");
+		redirectAttributes.addFlashAttribute("title", "회원가입 성공");
+		redirectAttributes.addFlashAttribute("text", "회원가입에 성공했습니다.");
+		return intReturn(result, "redirect:/member/loginForm.do", "common/error");
 	}
 	
 	private String intReturn(int result, String path, String errorPath) {

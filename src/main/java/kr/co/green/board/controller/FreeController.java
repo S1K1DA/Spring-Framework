@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,9 +41,17 @@ public class FreeController {
 	public String freeList(Model model,
 							@RequestParam(value="cpage", defaultValue="1") int cpage,
 							FreeDto free,
-							HttpSession session) {
+							HttpSession session,
+							@ModelAttribute("msg") String msg) {
 		// RequestParam 어노테이션 : 쿼리스트링을 받을 때 사용
 		// value : 쿼리스트링 키
+		logger.debug("cpage={}, free={}, msg={}", cpage, free, msg);
+		
+//		debug, info, error
+//		debug : 어떤 변수를 확인하거나, 값이 잘 들어 왔는지, ...
+//		info : 게시글 조회 요청(boardNo=3)이 왔다. 게시글 등록이 완료됐다
+		
+//		error : 예외 발생, 게시글 등록이 실패했다. 사용자 검증 실패, 게시글 제목이 너무 길 때, ...
 		
 		logger.info("/free/List 호출 완료 : cpage={}, memberNo={}", cpage, session.getAttribute("memberNo"));
 		
