@@ -87,35 +87,92 @@ public class AccessInterceptor implements HandlerInterceptor{
 //				return false;
 //			}
 			
-			HashMap<String, String> requestMap = new HashMap<>();
-			requestMap.put("/news/detail.do", "/news/list.do");
-			requestMap.put("/news/detail.do", "/news/editForm.do");
-			requestMap.put("/news/enroll.do", "/news/enrollForm.do");
-			requestMap.put("/news/editForm.do", "/news/detail.do");
-			requestMap.put("/news/edit.do", "/news/editForm.do");
-			requestMap.put("/news/delete.do", "/news/detail.do");
-			requestMap.put("/member/register.do", "/member/registerForm.do");
+			HashMap<String, String[]> requestMap = new HashMap<>();
+			requestMap.put("/news/detail.do", new String[]{"/news/list.do", "/news/editForm.do"});
+			requestMap.put("/news/enroll.do",  new String[]{"/news/enrollForm.do"});
+			requestMap.put("/news/editForm.do",  new String[]{"/news/detail.do"});
+			requestMap.put("/news/edit.do",  new String[]{"/news/editForm.do"});
+			requestMap.put("/news/delete.do",  new String[]{"/news/detail.do"});
+			requestMap.put("/member/register.do",  new String[]{"/member/registerForm.do"});
 			
+			// 1. 컨트롤러를 호출할지(true), 안할지(false) 결정하는 변수
+			boolean chackPathResult = true;
+			
+			// 2. requstMap에 있는 key를 하나씩 꺼내는 for문
 			for(String key : requestMap.keySet()) {
-				int result = pathCheck(requestURI, referer, localServerAddress, key, requestMap.get(key)); 
-				if(result == 1) {
+				// 3. pathCheck 메서드 호출 -> 반환값을 result에 저장
+				// result에 담기는 값이 false : 잘못된 접근
+				// result에 담기는 값이 true : 정상적인 접근
+				boolean result = pathCheck(requestURI, 
+										   referer, 	
+										   localServerAddress, 
+										   key, 
+										   requestMap.get(key)); 
+				
+				// 12. 반환받은 값이 false일 때 (잘못된 접근일 때)ㄴ
+				if(!result) {
 					response.sendRedirect("/error/accessDenied?referer=" + referer);
-					return false;
+					chackPathResult = false;
+					break;
 				}
 			}	
-			return true;
+			
+	        // 13. 검증이 종료된 후에 true로 남아있다면 정상적인 접근 -> 컨트롤러 호출
+	        //     false라면 비정상적인 접근 -> 컨트롤러 호출 X
+
+			return chackPathResult;
 		}
 		
-		private int pathCheck(String requestURI,
+		private boolean pathCheck(String requestURI,
 								  String referer,
 								  String localServerAddress,
 								  String requestMain,
-								  String requestSub) throws IOException {
-			if (requestURI.equals(requestMain) &&
-		            (referer == null || !referer.startsWith(localServerAddress + requestSub))) {
-		            return 1; 
-		        }
-			return 0;
+								  String[] requestSub) throws IOException {
+			// 4. 검증된 결과값을 저장하는 변수
+			// true : 정상적인 접근
+			// false : 잘못된 접근
+			boolean invalidReferer = true;
+			
+			// 5. 사용자가 요청한 URL과 꺼내온 key값이 일치하나 확인
+			if(requestURI.equals(requestMain)) {
+				
+				// 6-1. 요청했을 당시의 URL이 null인지 확인
+				//    * null인 경우 : 주소창에 직접 입력해서 접근하려고 할 때
+				if(referer == null) {
+					// 6-2. null인 경우 잘못된 접근이기 때문에 invalidReferer 변수에 false 값 저장
+					invalidReferer = false;
+				} else { // 7. 요청했을 당시의 URL이 null이 아닐 때
+					
+					// 8. HashMap value에 있는 값을 하나씩 꺼내서 value에 저장(반복)
+					// requestSub : {"/news/lost.do","/news/editForm.do"}
+					// 첫번째 반복할 때 value = /news/list.do
+					// 두번째 반복할 때 value = /news/editForm.do
+					for(String value : requestSub) {
+						
+						// 9. 요청했을 당시의 URL이 꺼낸 value의 주소가 아닐 때 true (잘못된 접근일 때)
+						
+						// 처리중인 페이지 : news/detail.do
+						// 요청했을 당시의 URL(referer) : news/list.do
+						
+						// 첫번째 반복에 의하여 value = /news/list.do
+						// referer(/news/list.do)가 value(/news/list.do)가 아닐 때
+						// --> 조건식 결과 : false, 정상적인 접근일 때
+						
+						// 두번째 반복에 의하여 value = /news/editForm.do
+						// referer(/news/list.do)가 value(/news/editForm.do)가 아닐 때
+						// --> 조건식 결과 : true, 잘못된 접근
+						if(!referer.startsWith(localServerAddress+value)) {
+							invalidReferer = false;
+						} else { // 10. 정상적인 접근일 때
+							invalidReferer = true;
+							break;  // 반복문 종료
+						}
+					}
+				}
+			}
+			// 11. 검증된 결과를 반환
+			return invalidReferer;
+			
 		}
 
 		

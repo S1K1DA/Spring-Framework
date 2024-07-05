@@ -164,3 +164,128 @@
 2024-07-04 15:57:54 INFO  NewsController:71 - 상세 조회 요청: boardNo=29, memberNo=10
 2024-07-04 15:57:54 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=29
 2024-07-04 15:57:54 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@551bc159
+2024-07-04 17:24:57 INFO  NewsController:71 - 상세 조회 요청: boardNo=29, memberNo=null
+2024-07-04 17:24:57 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=29
+2024-07-04 17:24:57 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@1f2308f5
+2024-07-04 17:26:04 INFO  NewsController:71 - 상세 조회 요청: boardNo=30, memberNo=null
+2024-07-04 17:26:04 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=30
+2024-07-04 17:26:04 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@72d9fd85
+2024-07-04 17:26:13 INFO  NewsController:71 - 상세 조회 요청: boardNo=30, memberNo=10
+2024-07-04 17:26:13 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=30
+2024-07-04 17:26:13 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@3b31a1fb
+2024-07-04 17:26:14 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=30
+2024-07-04 17:26:17 INFO  NewsController:184 - 게시글 수정 요청: boardNo=30, loginMemberNo=10
+2024-07-04 17:26:17 INFO  NewsServiceImpl:141 - 게시글 수정 요청: BoardDto=kr.co.green.board.model.dto.NewsDto@15bead75, loginMemberNo=10
+2024-07-04 17:26:17 INFO  NewsController:190 - 게시글 수정 성공: boardNo=30
+2024-07-04 17:29:46 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=30
+2024-07-04 17:29:48 INFO  NewsController:184 - 게시글 수정 요청: boardNo=30, loginMemberNo=10
+2024-07-04 17:29:48 INFO  NewsServiceImpl:141 - 게시글 수정 요청: BoardDto=kr.co.green.board.model.dto.NewsDto@717404dc, loginMemberNo=10
+2024-07-04 17:29:48 INFO  NewsController:190 - 게시글 수정 성공: boardNo=30
+2024-07-04 17:29:48 INFO  NewsController:71 - 상세 조회 요청: boardNo=30, memberNo=10
+2024-07-04 17:29:48 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=30
+2024-07-04 17:29:48 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@3e7ef7a1
+2024-07-05 10:01:04 INFO  NewsController:71 - 상세 조회 요청: boardNo=29, memberNo=10
+2024-07-05 10:01:04 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=29
+2024-07-05 10:01:04 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@57a9460d
+2024-07-05 10:01:06 INFO  NewsController:71 - 상세 조회 요청: boardNo=30, memberNo=10
+2024-07-05 10:01:06 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=30
+2024-07-05 10:01:06 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@79beded8
+2024-07-05 10:01:07 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=30
+2024-07-05 10:01:08 INFO  NewsController:184 - 게시글 수정 요청: boardNo=30, loginMemberNo=10
+2024-07-05 10:01:08 INFO  NewsServiceImpl:141 - 게시글 수정 요청: BoardDto=kr.co.green.board.model.dto.NewsDto@5e296ec6, loginMemberNo=10
+2024-07-05 10:01:08 INFO  NewsController:190 - 게시글 수정 성공: boardNo=30
+2024-07-05 10:01:08 INFO  NewsController:71 - 상세 조회 요청: boardNo=30, memberNo=10
+2024-07-05 10:01:08 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=30
+2024-07-05 10:01:08 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@116a7d9e
+2024-07-05 10:01:18 INFO  NewsController:71 - 상세 조회 요청: boardNo=30, memberNo=10
+2024-07-05 10:01:18 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=30
+2024-07-05 10:01:18 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@60fcd07c
+2024-07-05 10:01:28 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=30
+2024-07-05 10:01:29 INFO  NewsController:184 - 게시글 수정 요청: boardNo=30, loginMemberNo=10
+2024-07-05 10:01:29 INFO  NewsServiceImpl:141 - 게시글 수정 요청: BoardDto=kr.co.green.board.model.dto.NewsDto@5728dba9, loginMemberNo=10
+2024-07-05 10:01:29 INFO  NewsController:190 - 게시글 수정 성공: boardNo=30
+2024-07-05 10:01:29 INFO  NewsController:71 - 상세 조회 요청: boardNo=30, memberNo=10
+2024-07-05 10:01:29 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=30
+2024-07-05 10:01:29 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@3e422e57
+2024-07-05 10:01:35 INFO  NewsController:71 - 상세 조회 요청: boardNo=29, memberNo=10
+2024-07-05 10:01:35 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=29
+2024-07-05 10:01:35 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@4c8d98e0
+2024-07-05 10:01:37 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=29
+2024-07-05 10:01:38 INFO  NewsController:184 - 게시글 수정 요청: boardNo=29, loginMemberNo=10
+2024-07-05 10:01:38 INFO  NewsServiceImpl:141 - 게시글 수정 요청: BoardDto=kr.co.green.board.model.dto.NewsDto@6ae27fda, loginMemberNo=10
+2024-07-05 10:01:38 INFO  NewsController:190 - 게시글 수정 성공: boardNo=29
+2024-07-05 10:01:38 INFO  NewsController:71 - 상세 조회 요청: boardNo=29, memberNo=10
+2024-07-05 10:01:38 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=29
+2024-07-05 10:01:38 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@2be773e9
+2024-07-05 10:02:19 INFO  NewsController:71 - 상세 조회 요청: boardNo=30, memberNo=10
+2024-07-05 10:02:19 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=30
+2024-07-05 10:02:19 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@b07d778
+2024-07-05 10:03:23 INFO  NewsController:71 - 상세 조회 요청: boardNo=29, memberNo=10
+2024-07-05 10:03:23 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=29
+2024-07-05 10:03:23 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@15520630
+2024-07-05 10:03:25 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=29
+2024-07-05 10:03:26 INFO  NewsController:184 - 게시글 수정 요청: boardNo=29, loginMemberNo=10
+2024-07-05 10:03:26 INFO  NewsServiceImpl:141 - 게시글 수정 요청: BoardDto=kr.co.green.board.model.dto.NewsDto@3c4f6f6, loginMemberNo=10
+2024-07-05 10:03:26 INFO  NewsController:190 - 게시글 수정 성공: boardNo=29
+2024-07-05 10:03:26 INFO  NewsController:71 - 상세 조회 요청: boardNo=29, memberNo=10
+2024-07-05 10:03:26 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=29
+2024-07-05 10:03:26 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@12fe225b
+2024-07-05 10:03:32 INFO  NewsController:71 - 상세 조회 요청: boardNo=30, memberNo=10
+2024-07-05 10:03:32 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=30
+2024-07-05 10:03:32 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@32a8c1db
+2024-07-05 10:03:33 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=30
+2024-07-05 10:03:34 INFO  NewsController:184 - 게시글 수정 요청: boardNo=30, loginMemberNo=10
+2024-07-05 10:03:34 INFO  NewsServiceImpl:141 - 게시글 수정 요청: BoardDto=kr.co.green.board.model.dto.NewsDto@c467914, loginMemberNo=10
+2024-07-05 10:03:34 INFO  NewsController:190 - 게시글 수정 성공: boardNo=30
+2024-07-05 10:03:34 INFO  NewsController:71 - 상세 조회 요청: boardNo=30, memberNo=10
+2024-07-05 10:03:34 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=30
+2024-07-05 10:03:34 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@44835da9
+2024-07-05 10:03:38 INFO  NewsController:71 - 상세 조회 요청: boardNo=23, memberNo=10
+2024-07-05 10:03:38 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=23
+2024-07-05 10:03:38 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@606e16a7
+2024-07-05 10:04:36 DEBUG FreeController:48 - cpage=1, free=kr.co.green.board.model.dto.FreeDto@2d063d3, msg=
+2024-07-05 10:04:36 INFO  FreeController:56 - /free/List 호출 완료 : cpage=1, memberNo=10
+2024-07-05 10:04:36 DEBUG FreeController:72 - 호출된 게시글 : list size=5
+2024-07-05 10:05:37 INFO  NewsController:71 - 상세 조회 요청: boardNo=29, memberNo=10
+2024-07-05 10:05:37 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=29
+2024-07-05 10:05:37 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@664d63b6
+2024-07-05 10:05:39 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=29
+2024-07-05 10:05:40 INFO  NewsController:184 - 게시글 수정 요청: boardNo=29, loginMemberNo=10
+2024-07-05 10:05:40 INFO  NewsServiceImpl:141 - 게시글 수정 요청: BoardDto=kr.co.green.board.model.dto.NewsDto@162171d8, loginMemberNo=10
+2024-07-05 10:05:40 INFO  NewsController:190 - 게시글 수정 성공: boardNo=29
+2024-07-05 10:05:40 INFO  NewsController:71 - 상세 조회 요청: boardNo=29, memberNo=10
+2024-07-05 10:05:40 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=29
+2024-07-05 10:05:40 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@287e99d5
+2024-07-05 10:20:08 INFO  NewsController:71 - 상세 조회 요청: boardNo=29, memberNo=10
+2024-07-05 10:20:09 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=29
+2024-07-05 10:20:09 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@60bbbaf4
+2024-07-05 10:20:12 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=29
+2024-07-05 10:20:14 INFO  NewsController:184 - 게시글 수정 요청: boardNo=29, loginMemberNo=10
+2024-07-05 10:20:14 INFO  NewsServiceImpl:141 - 게시글 수정 요청: BoardDto=kr.co.green.board.model.dto.NewsDto@3262d08c, loginMemberNo=10
+2024-07-05 10:20:14 INFO  NewsController:190 - 게시글 수정 성공: boardNo=29
+2024-07-05 10:20:14 INFO  NewsController:71 - 상세 조회 요청: boardNo=29, memberNo=10
+2024-07-05 10:20:14 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=29
+2024-07-05 10:20:14 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@4cfc0942
+2024-07-05 10:20:18 INFO  NewsController:71 - 상세 조회 요청: boardNo=30, memberNo=10
+2024-07-05 10:20:18 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=30
+2024-07-05 10:20:18 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@7c245f0b
+2024-07-05 10:20:19 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=30
+2024-07-05 10:20:20 INFO  NewsController:184 - 게시글 수정 요청: boardNo=30, loginMemberNo=10
+2024-07-05 10:20:20 INFO  NewsServiceImpl:141 - 게시글 수정 요청: BoardDto=kr.co.green.board.model.dto.NewsDto@2f1d7c9, loginMemberNo=10
+2024-07-05 10:20:20 INFO  NewsController:190 - 게시글 수정 성공: boardNo=30
+2024-07-05 10:20:20 INFO  NewsController:71 - 상세 조회 요청: boardNo=30, memberNo=10
+2024-07-05 10:20:20 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=30
+2024-07-05 10:20:20 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@16cd0d8c
+2024-07-05 10:21:26 DEBUG FreeController:48 - cpage=1, free=kr.co.green.board.model.dto.FreeDto@4d2d164a, msg=
+2024-07-05 10:21:26 INFO  FreeController:56 - /free/List 호출 완료 : cpage=1, memberNo=10
+2024-07-05 10:21:26 DEBUG FreeController:72 - 호출된 게시글 : list size=5
+2024-07-05 10:22:32 INFO  NewsController:71 - 상세 조회 요청: boardNo=30, memberNo=10
+2024-07-05 10:22:32 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=30
+2024-07-05 10:22:32 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@3e3d076c
+2024-07-05 10:22:34 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=30
+2024-07-05 10:22:37 INFO  NewsController:184 - 게시글 수정 요청: boardNo=30, loginMemberNo=10
+2024-07-05 10:22:37 INFO  NewsServiceImpl:141 - 게시글 수정 요청: BoardDto=kr.co.green.board.model.dto.NewsDto@3bb9b1a0, loginMemberNo=10
+2024-07-05 10:22:37 INFO  NewsController:190 - 게시글 수정 성공: boardNo=30
+2024-07-05 10:22:37 INFO  NewsController:71 - 상세 조회 요청: boardNo=30, memberNo=10
+2024-07-05 10:22:37 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=30
+2024-07-05 10:22:37 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@55e5caa
