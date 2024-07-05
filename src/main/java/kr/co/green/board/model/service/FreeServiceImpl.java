@@ -1,16 +1,20 @@
 package kr.co.green.board.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.green.board.model.dao.FreeDao;
 import kr.co.green.board.model.dto.FreeDto;
 import kr.co.green.common.pageing.PageInfo;
+import kr.co.green.common.transaction.TransactionHandler;
 import kr.co.green.common.upload.UploadFile;
 import kr.co.green.common.validation.DataValidation;
 
@@ -19,19 +23,25 @@ public class FreeServiceImpl implements FreeService {
 	
 	private final FreeDao freeDao;
 	private final DataValidation dataValidation;
-	private FreeDto freeDto;
 	private final UploadFile uploadFile;
+	private final TransactionHandler transactionHandler;
+	private FreeDto freeDto;
 	
 	@Autowired
-	public FreeServiceImpl(FreeDao freeDao, DataValidation dataValidation, UploadFile uploadFile) {
+	public FreeServiceImpl(FreeDao freeDao, 
+						   DataValidation dataValidation, 
+						   UploadFile uploadFile, 
+						   TransactionHandler transactionHandler) {
 		this.freeDao = freeDao;
 		this.dataValidation = dataValidation;
 		this.uploadFile = uploadFile;
+		this.transactionHandler = transactionHandler;
 		this.freeDto = new FreeDto();
 	}
 	
 	@Override
-	public List<FreeDto> freeList(PageInfo pi, FreeDto free) {
+	public List<FreeDto> freeList(PageInfo pi, 
+								  FreeDto free) {
 		return freeDao.freeList(pi, free);
 		
 	}
@@ -42,7 +52,11 @@ public class FreeServiceImpl implements FreeService {
 	}
 	
 	@Override
-	public FreeDto getDetail(FreeDto free, String type) {
+	public FreeDto getDetail(FreeDto free, 
+							 String type) {
+		HashMap<String, Object> getTransaction = transactionHandler.getStatus();
+		TransactionStatus status = (TransactionStatus) getTransaction.get("status");
+		PlatformTransactionManager transactionManager = (PlatformTransactionManager) getTransaction.get("transactionManager");
 		
 		try {
 			int result = 0;
@@ -50,6 +64,7 @@ public class FreeServiceImpl implements FreeService {
 			if(type.equals("detail")) {
 				// 조회수 증가
 				result = freeDao.addViews(free);
+				result = 0;
 			} else if(type.equals("edit")) {
 				result = 1;
 			}
@@ -58,8 +73,10 @@ public class FreeServiceImpl implements FreeService {
 			if(result == 1) {
 				// 게시글 정보 조회
 				freeDto = freeDao.getDetail(free);
+				transactionManager.commit(status);
 				return freeDto;
 			} else {
+				transactionManager.rollback(status);
 				return null;
 			}
 			
@@ -72,7 +89,10 @@ public class FreeServiceImpl implements FreeService {
 	}
 	
 	@Override
-	public int setEnroll(FreeDto free, MultipartFile upload, HttpSession session) {
+	public int setEnroll(FreeDto free, 
+						 MultipartFile upload, 
+						 HttpSession session) {
+		
 		if(dataValidation.lengthCheck(free.getBoardTitle(), 100)) {
 			
 			uploadFile.upload(free, upload, session);
@@ -90,7 +110,9 @@ public class FreeServiceImpl implements FreeService {
 	
 	@Override
 //	public int delete(int boardNo, int memberNo, HttpSession session) {
-		public int delete(int boardNo, int memberNo, int loginMemberNo) {
+		public int delete(int boardNo, 
+						  int memberNo, 
+						  int loginMemberNo) {
 		// 요청한 사용자가 글 작성자가 맞는지 검증
 		if(memberNo == loginMemberNo) {
 			int deleteResult = freeDao.delete(boardNo);
@@ -104,7 +126,10 @@ public class FreeServiceImpl implements FreeService {
 		return 0;
 	}
 	@Override
-	public int edit(FreeDto free, MultipartFile upload, int loginMemberNo) {
+	public int edit(FreeDto free, 
+					MultipartFile upload, 
+					int loginMemberNo) {
+		
 		// 1. 사용자 검증
 		// 2. 데이터 길이 검사
 		//  -> 제목 : 최대 300byte

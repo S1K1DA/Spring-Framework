@@ -1,5 +1,6 @@
 package kr.co.green.board.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -8,11 +9,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.green.board.model.dao.NewsDao;
 import kr.co.green.board.model.dto.NewsDto;
 import kr.co.green.common.pageing.PageInfo;
+import kr.co.green.common.transaction.TransactionHandler;
 import kr.co.green.common.upload.UploadFile;
 import kr.co.green.common.validation.DataValidation;
 
@@ -23,14 +27,16 @@ public class NewsServiceImpl implements NewsService {
 	
 	private final NewsDao newsDao;
 	private final DataValidation dataValidation;
+	private final TransactionHandler transactionHandler;
 	private NewsDto newsDto;
 	private final UploadFile uploadFile;
 	
 	@Autowired
-	public NewsServiceImpl(NewsDao newsDao, DataValidation dataValidation, UploadFile uploadFile) {
+	public NewsServiceImpl(NewsDao newsDao, DataValidation dataValidation, UploadFile uploadFile,TransactionHandler transactionHandler) {
 		this.newsDao = newsDao;
 		this.newsDto = new NewsDto();
 		this.dataValidation = dataValidation;
+		this.transactionHandler = transactionHandler;
 		this.uploadFile = uploadFile;
 	}
 
@@ -131,6 +137,9 @@ public class NewsServiceImpl implements NewsService {
 	
 	@Override
 	public int edit(NewsDto news, MultipartFile upload, int loginMemberNo) {
+		HashMap<String, Object> getTransaction = transactionHandler.getStatus();
+		TransactionStatus status = (TransactionStatus) getTransaction.get("status");
+		PlatformTransactionManager transactionManager = (PlatformTransactionManager) getTransaction.get("transactionManager");
 		// 1. 사용자 검증
 		// 2. 데이터 길이 검사
 		//  -> 제목 : 최대 300byte
@@ -143,24 +152,33 @@ public class NewsServiceImpl implements NewsService {
 			updateResult = newsDao.edit(news);
 			
 			if(updateResult == 1 && !upload.isEmpty()) {
-	            logger.info("게시글 수정 성공: boardNo={}", news.getBoardNo());
 				// 4. 업로드한 파일이 있을 때 : 기존 파일 삭제 -> 새로운 파일 업로드
 				//                        upload  테이블 UPDATE
 				NewsDto getFileName = newsDao.getFileName(news.getBoardNo());
 				uploadFile.newsUpload(news, upload, null);
 				
-				if(uploadFile.newsDelete(getFileName) && news.getUploadName() != null) {
-                    logger.info("새로운 파일 업로드 성공: boardNo={}, boardUploadName={}", news.getBoardNo(), news.getUploadName());
+				if(news.getUploadName() == null && news.getUploadPath() == null && news.getUploadOriginName() == null) {
+					transactionManager.rollback(status);
+				}
+				
+				boolean deleteResult = uploadFile.newsDelete(getFileName);
+				
+				if(deleteResult && news.getUploadName() != null) {
+					transactionManager.commit(status);
+					logger.info("새로운 파일 업로드 성공: boardNo={}, boardUploadName={}", news.getBoardNo(), news.getUploadName());
 					return newsDao.setUploadUpdate(news) == 1 ? 1 : 0;
 				} else {
+					transactionManager.rollback(status);
                     logger.warn("새로운 파일 업로드 실패: boardNo={}, boardUploadName={}", news.getBoardNo(), news.getUploadName());
 				}
 			}
 			// 5. 업로드한 파일이 없을 떄 :  띡히 할거 없음.
 			
 		} else {
+			transactionManager.rollback(status);
 			logger.warn("게시글 등록 실패: 제목 길이 검증 실패");
 		}
+		logger.info("게시글 수정 성공: boardNo={}", news.getBoardNo());
 		return updateResult;
 	}
 	}
