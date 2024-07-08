@@ -27,7 +27,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<beans:bean id="loginCheckInterceptor" 
+	<!-- <beans:bean id="loginCheckInterceptor" 
 				class="kr.co.green.common.interceptor.LoginCheckInterceptor">
 	</beans:bean>
 	
@@ -51,7 +51,7 @@
 			<exclude-mapping path="/**/*.js"></exclude-mapping>
 			<beans:ref bean="loginCheckInterceptor"></beans:ref>
 		</interceptor>
-	</interceptors>
+	</interceptors> -->
 		
 		<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></beans:bean>
 	

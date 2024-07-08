@@ -5,6 +5,7 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import kr.co.green.member.model.dao.MemberDao;
 import kr.co.green.member.model.dto.MemberDto;
@@ -64,6 +65,16 @@ public class MemberServiceImpl implements MemberService {
 		} else {
 			return null;
 		}
+	}
+	
+	@Override
+	public MemberDto getInfo(String id) {
+		return memberDao.getInfo(id);
+	}
+	
+	@Override
+	public int deleteMember(String id) {
+		return memberDao.deleteMember(id);
 	}
 	
 }

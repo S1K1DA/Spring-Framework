@@ -706,3 +706,25 @@
 2024-07-05 16:17:59 INFO  NewsController:71 - 상세 조회 요청: boardNo=21, memberNo=10
 2024-07-05 16:17:59 INFO  NewsServiceImpl:70 - 게시글 상세 조회 성공: boardNo=21
 2024-07-05 16:17:59 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@289b8c0f
+2024-07-05 16:21:18 INFO  NewsController:71 - 상세 조회 요청: boardNo=29, memberNo=10
+2024-07-05 16:21:18 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=29
+2024-07-05 16:21:18 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@102b7194
+2024-07-05 16:21:19 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=29
+2024-07-05 16:21:23 INFO  NewsController:184 - 게시글 수정 요청: boardNo=29, loginMemberNo=10
+2024-07-05 16:21:23 INFO  NewsServiceImpl:141 - 게시글 수정 요청: BoardDto=kr.co.green.board.model.dto.NewsDto@7c6d027a, loginMemberNo=10
+2024-07-05 16:21:23 INFO  NewsServiceImpl:146 - 게시글 수정 성공: boardNo=29
+2024-07-05 16:21:26 INFO  NewsController:71 - 상세 조회 요청: boardNo=23, memberNo=10
+2024-07-05 16:21:26 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=23
+2024-07-05 16:21:26 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@3b374964
+2024-07-05 16:21:27 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=23
+2024-07-05 16:21:30 INFO  NewsController:184 - 게시글 수정 요청: boardNo=23, loginMemberNo=10
+2024-07-05 16:21:30 INFO  NewsServiceImpl:141 - 게시글 수정 요청: BoardDto=kr.co.green.board.model.dto.NewsDto@7b7c03d8, loginMemberNo=10
+2024-07-05 16:21:31 INFO  NewsServiceImpl:146 - 게시글 수정 성공: boardNo=23
+2024-07-05 16:21:31 INFO  NewsServiceImpl:153 - 새로운 파일 업로드 성공: boardNo=23, boardUploadName=240705162131_MEWxIAOg.png
+2024-07-05 16:21:31 INFO  NewsController:190 - 게시글 수정 성공: boardNo=23
+2024-07-05 16:21:31 INFO  NewsController:71 - 상세 조회 요청: boardNo=23, memberNo=10
+2024-07-05 16:21:31 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=23
+2024-07-05 16:21:31 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@1be05955
+2024-07-05 16:21:37 INFO  NewsController:71 - 상세 조회 요청: boardNo=23, memberNo=10
+2024-07-05 16:21:37 INFO  NewsServiceImpl:63 - 게시글 상세 조회 성공: boardNo=23
+2024-07-05 16:21:37 INFO  NewsController:84 - 상세 조회 성공: kr.co.green.board.model.dto.NewsDto@1bf44f29

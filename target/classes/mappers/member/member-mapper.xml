@@ -30,4 +30,15 @@
 		SELECT * FROM member 
 		WHERE m_Id = #{memberId} 
 	</select>
+	
+	<select id="getInfoApi" resultMap="memberResultSet">
+		SELECT * FROM member 
+		WHERE m_Id = #{memberId}
+	</select>
+	
+	<delete id="deleteMember">
+		DELETE member
+		WHERE m_id = #{id}
+	</delete>
+	
 </mapper>
